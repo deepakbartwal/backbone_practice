@@ -19,20 +19,20 @@ var UserModel = Backbone.Model.extend({
 // });
 
 
-var loginView = Backbone.View.extend{
-  el:$("#divLogin"),
+var RegisterView = Backbone.View.extend{
+  el:$("#divRegister"),
   initialize: function(){
 
   },
   events:{
-    'click #login': 'login',
+    'click #Register': 'register',
   },
   login:{
     username: $("#username").val(),
     password: $("#password").val(),
     $.ajax({
       type: "POST",
-      url: url,
+      url: "register/",
       data: data,
       success: {
         alert('success');
@@ -57,7 +57,7 @@ var loginView = Backbone.View.extend{
     password: $("#password").val(),
     $.ajax({
       type: "POST",
-      url: url,
+      url: "login/",
       data: data,
       success: {
         alert('success');
