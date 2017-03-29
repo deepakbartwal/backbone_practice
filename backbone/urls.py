@@ -22,6 +22,6 @@ from core import views as core_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login$', core_views.Login),
-    url(r'^logout$', core_views.Logout)
+    url(r'^logout$', core_views.Logout),
+    url(r'register$', core_views.Register)
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

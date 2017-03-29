@@ -8,31 +8,41 @@ from pprint import pprint
 # from .utils import *
 # Create your views here.
 
-def RegistrationView(request):
-    pass
+def Register(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+
+    if request.method == "GET":
+        return render(request, "register.html", None)
+    if request.method == "POST":
+        return HttpResponse("data received")
 
 def Login(request):
     """view to handle incoming login request"""
+    pprint("_____________________________login request_____________________________")
     if request.user.is_authenticated:
         return redirect('/')
     if request.method == 'GET':
         next = request.GET.get('next', '/')
     if request.method == "POST":
         next = request.GET.get('next', '/')
-        user_email = request.POST['user_email']
+        pprint(request.POST)
+        username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=user_email, password=password)
+        user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+            pprint("_____________________________login Successful_____________________________")
             if next == '':
                 return redirect('?status=login')
             return HttpResponseRedirect(next)
         else:
             error = 'Incorrect Email or Password'
+            pprint("_____________________________login error_____________________________")
             return render(request, 'login.html',
                           context={'error': error, 'next':next})
     else:
-        return render(request, "index.html", {'next': next})
+        return render(request, "login.html", {'next': next})
 
 def Logout(request):
     """view to handle the incoming logout requst"""

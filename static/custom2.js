@@ -1,23 +1,80 @@
 var reg_name, reg_pass;
-var Client = Backbone.Model.extend({
+var UserModel = Backbone.Model.extend({
     defaults: {
         name: null,
         pwd: null
     },
     initialize: function () {
-        console.log("initialize client");
+        console.log("initialize initialized");
     }
 });
 
-var ClientsCollection = Backbone.Collection.extend({
-    model: Client,
-    initialize: function () {
-        console.log("initialize clients collection");
-        this.bind("add", function (model) { console.log("Add", model.get('id'), model); });
-        this.bind("remove", function (el) { console.log("Remove", el.get('id'), el); });
-    }
+// var ClientsCollection = Backbone.Collection.extend({
+//     model: Client,
+//     initialize: function () {
+//         console.log("initialize clients collection");
+//         this.bind("add", function (model) { console.log("Add", model.get('id'), model); });
+//         this.bind("remove", function (el) { console.log("Remove", el.get('id'), el); });
+//     }
+// });
+
+
+// var RegisterView = Backbone.View.extend{
+//   el:$("#divRegister"),
+//   initialize: function(){
+//
+//   },
+//   events:{
+//     'click #Register': 'register',
+//   },
+//   login:{
+//     username: $("#username").val(),
+//     password: $("#password").val(),
+//     $.ajax({
+//       type: "POST",
+//       url: "register/",
+//       data: data,
+//       success: {
+//         alert('success');
+//       },
+//       error: {
+//         alert("error");
+//       }
+//     });
+//   }
+// }
+
+var loginView = Backbone.View.extend({
+  el:$("#divLogin"),
+  initialize: function(){
+    $("#divLogin").html(
+      "UserName :<input type="text" id="user_name" placeholder="Username"><br/><br/>"+
+      "Password :<input type="password" id="pass_word" placeholder="Paasword"><br/><br/>"+
+      "<button id="login">Login</button>"
+    );
+  },
+  events:{
+    'click #login': 'login',
+  },
+  login:{
+    username: $("#username").val(),
+    password: $("#password").val(),
+    $.ajax({
+      type: "POST",
+      url: "login/",
+      data: {"username":username, "password":password},
+      success: {
+        alert('success');
+      },
+      error: {
+        alert("error");
+      }
+    });
+  }
 });
 
+
+//
 // var ClientView = Backbone.View.extend({
 //     el: $("#divClient"), /* Utilisation de zepto pour lier ClientView au DOM */
 //     initialize: function () {
